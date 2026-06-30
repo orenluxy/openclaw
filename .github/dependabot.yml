@@ -31,6 +31,11 @@ updates:
     open-pull-requests-limit: 10
     registries:
       - npm-npmjs
+    ignore:
+      # axios 1.14.1 contains malicious plain-crypto-js dependency
+      # Remove after: 2026-03-15 (check if fixed)
+      - dependency-name: "axios"
+        versions: ["1.14.1"]
 
   # GitHub Actions
   - package-ecosystem: github-actions
