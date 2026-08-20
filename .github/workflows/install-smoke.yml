@@ -45,6 +45,10 @@ env:
 
 jobs:
   preflight:
+    # Nightly schedule only makes sense upstream: the smoke jobs depend on
+    # upstream-only infra (Blacksmith builders, GHCR cache), so scheduled runs
+    # in a fork always fail. Manual dispatch and workflow_call still run here.
+    if: github.event_name != 'schedule' || github.repository == 'openclaw/openclaw'
     runs-on: ubuntu-24.04
     outputs:
       docs_only: ${{ steps.manifest.outputs.docs_only }}
